@@ -11,15 +11,15 @@ public class SignUpRequest {
     private String firstName;
     private String lastName;
     private String userName;
-    private String email;
     private String password;
-    String gender;
-    Date birthday;
-    String phoneNumber;
-    String familyMemberFirstName;
-    String familyMemberLastName;
-    String familyMemberPhoneNumber;
-    String whereDidYouFindUs;
-    String role="USER";
+    private String phoneNumber;
+    private String gender;
+    private Date birthday;
+    private String whereDidYouFindUs;
+    private String familyMemberFirstName;
+    private String familyMemberLastName;
+    private String familyMemberPhoneNumber;
+    private String email;
+    private String role="USER";
 
 }

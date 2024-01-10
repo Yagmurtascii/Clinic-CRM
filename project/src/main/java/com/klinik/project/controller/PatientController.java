@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -73,17 +74,22 @@ public class PatientController {
 
     @PostMapping("/checkMail")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity<HttpStatus> checkMail(@RequestParam String email, @RequestParam String password) {
-        password=(passwordEncoder.encode(password));
-        System.out.println(service.isEmailValid(email));
-        if (service.isEmailValid(email)) {
-            service.checkMail(email, password);
-            return ResponseEntity.ok(HttpStatus.CREATED);
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<HttpStatus> checkMail(@RequestBody Map<String, String> request) {
+        try {
+            String email = request.get("email");
+            String password = request.get("password");
+            password = passwordEncoder.encode(password);
+            System.out.println(service.isEmailValid(email));
+            if (service.isEmailValid(email)) {
+                service.updatePassword(email, password);
+                return ResponseEntity.ok(HttpStatus.CREATED);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+               return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @GetMapping("/")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<PatientModel>> getAllPatients() {

@@ -38,7 +38,7 @@ public class PatientModel implements UserDetails {
     String email;
     String token;
     @Enumerated(EnumType.STRING)
-    @Column(length = 20) // adjust the length based on your enum values
+    @Column(length = 20)
     private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

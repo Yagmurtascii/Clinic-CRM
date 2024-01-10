@@ -24,15 +24,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-
     private final PatientRepository repo;
     private final PasswordEncoder passwordEncoder;
-
     private final AuthenticationManager authenticationManager;
-
     private final JWTService jwtService;
-    public PatientModel signUp(SignUpRequest signUpRequest)
-    {
+    public PatientModel signUp(SignUpRequest signUpRequest) {
         PatientModel user=new PatientModel();
         user.setUserName(signUpRequest.getUserName());
         user.setFirstName(signUpRequest.getFirstName());
@@ -45,10 +41,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setFamilyMemberLastName(signUpRequest.getFamilyMemberLastName());
         return repo.save(user);
     }
-    @Autowired
-    PatientService service;
-    public JwtAuthenticationResponse signin(SignInRequest signInRequest)
-    {
+    public JwtAuthenticationResponse signin(SignInRequest signInRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getUserName(),signInRequest.getPassword()));
         var user=repo.findByUserName(signInRequest.getUserName());
         var jwt=jwtService.generateToken(user);
@@ -56,7 +49,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         JwtAuthenticationResponse jwtAuthenticationResponse=new JwtAuthenticationResponse();
         jwtAuthenticationResponse.setToken(jwt);
         jwtAuthenticationResponse.setRefreshToken(refreshToken);
-
         return jwtAuthenticationResponse;
     }
 

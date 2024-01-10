@@ -4,6 +4,7 @@ package com.klinik.project.service;
 import com.klinik.project.model.PatientModel;
 import com.klinik.project.repository.PatientRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -73,6 +74,23 @@ public class PatientService {
             // Handle exceptions or log errors
             e.printStackTrace();
             throw new RuntimeException("Failed to update", e);
+        }
+    }
+
+    public void updatePassword(String email, String newPassword) {
+        // Retrieve the user from the database based on the email
+        Optional<PatientModel> optionalUser = repo.findByEmail(email);
+
+        // Check if the user exists
+        if (optionalUser.isPresent()) {
+            PatientModel user = optionalUser.get();
+
+            // Update the password and save the user
+            user.setPassword(newPassword);
+            repo.save(user);
+        } else {
+            System.out.println("Not found");
+
         }
     }
 
