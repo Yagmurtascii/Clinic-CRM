@@ -48,7 +48,6 @@ public class PatientController {
         return null;
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<PatientModel> getById(@PathVariable  Long id) {
         Optional<PatientModel> patientModel = service.getById(id);
