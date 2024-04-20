@@ -1,1 +1,1 @@
-# Klinik-CRM
+# Clinic-CRM
