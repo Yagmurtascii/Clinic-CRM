@@ -11,7 +11,7 @@ The Clinic CRM project is an application developed for language and speech thera
   - CK Editor 6.2.0
   - Postman
 
-  -UI
+- UI
   - Login
     
     <img width="634" alt="Screenshot 2024-07-30 at 00 11 12" src="https://github.com/user-attachments/assets/434386a0-c16c-4a98-9f46-00561a2b9084">
